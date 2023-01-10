@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecomer_riv/pages/home_pages.dart';
 import 'package:flutter_ecomer_riv/provider/user_provider.dart';
 import 'package:flutter_ecomer_riv/router.dart';
+import 'package:flutter_ecomer_riv/services/auth_services.dart';
 import 'package:provider/provider.dart';
 
 import 'const/global_varriable.dart';
@@ -14,19 +16,32 @@ void main() {
       child: const MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final AuthServices authServices=AuthServices();
+  @override
+  void initState() {
+    // TODO: implement initState
+    authServices.getUserData(context);
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: GlobalVariables.backGroundColor,
-        colorScheme: ColorScheme.light(
+        colorScheme: const ColorScheme.light(
           primary: GlobalVariables.secondaryColor
         ),
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           elevation: 0,
           iconTheme: IconThemeData(
             color: Colors.black
@@ -34,7 +49,7 @@ class MyApp extends StatelessWidget {
         )
       ),
       onGenerateRoute: (settings)=>generateRoute(settings),
-      home: AuthScreen(),
+      home:Provider.of<UserProvider>(context).user.token.isNotEmpty? const HomePage():const AuthScreen(),
     );
   }
 }
