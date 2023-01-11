@@ -3,6 +3,7 @@ import 'package:flutter_ecomer_riv/pages/home_pages.dart';
 import 'package:flutter_ecomer_riv/provider/user_provider.dart';
 import 'package:flutter_ecomer_riv/router.dart';
 import 'package:flutter_ecomer_riv/services/auth_services.dart';
+import 'package:flutter_ecomer_riv/widgets/bottom_bar-widgets.dart';
 import 'package:provider/provider.dart';
 
 import 'const/global_varriable.dart';
@@ -49,7 +50,7 @@ class _MyAppState extends State<MyApp> {
         )
       ),
       onGenerateRoute: (settings)=>generateRoute(settings),
-      home:Provider.of<UserProvider>(context).user.token.isNotEmpty? const HomePage():const AuthScreen(),
+      home:Provider.of<UserProvider>(context).user.token.isNotEmpty? const BottomBarWidget():const AuthScreen(),
     );
   }
 }

@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../const/error_handling.dart';
 import '../const/utils.dart';
 import '../pages/home_pages.dart';
+import '../widgets/bottom_bar-widgets.dart';
 
 class AuthServices {
   //sign up user
@@ -73,7 +74,7 @@ class AuthServices {
         final prefs = await SharedPreferences.getInstance();
      await   prefs.setString("x-auth-token", jsonDecode(res.body)['token']);
      Provider.of<UserProvider>(context,listen: false).setUser(res.body);
-    Navigator.pushNamedAndRemoveUntil(context, HomePage.routeName, (route) => false);
+    Navigator.pushNamedAndRemoveUntil(context, BottomBarWidget.routeName, (route) => false);
       });
     } catch (error) {
       showSnackBar(context, error.toString());
