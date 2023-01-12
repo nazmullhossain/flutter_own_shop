@@ -6,6 +6,7 @@ import 'package:flutter_ecomer_riv/services/auth_services.dart';
 import 'package:flutter_ecomer_riv/widgets/bottom_bar-widgets.dart';
 import 'package:provider/provider.dart';
 
+import 'admin/pages/admin_page.dart';
 import 'const/global_varriable.dart';
 import 'features/auth/auth_screen.dart';
 
@@ -50,7 +51,9 @@ class _MyAppState extends State<MyApp> {
         )
       ),
       onGenerateRoute: (settings)=>generateRoute(settings),
-      home:Provider.of<UserProvider>(context).user.token.isNotEmpty? const BottomBarWidget():const AuthScreen(),
+      home:Provider.of<UserProvider>(context).user.token.isNotEmpty?
+      Provider.of<UserProvider>(context).user.type=="user"? AdminPage():BottomBarWidget()
+          :const AuthScreen(),
     );
   }
 }

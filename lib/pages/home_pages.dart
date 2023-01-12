@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../const/global_varriable.dart';
 import '../widgets/addres_box_widgets.dart';
 import '../widgets/carousel_widgets.dart';
+import '../widgets/deal_of_day.dart';
 import '../widgets/top_catagory_widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -93,14 +94,18 @@ borderSide: BorderSide.none,
           ),
         ),
       ),
-      body: Column(
-        children: const [
-          AddressBoxWidget(),
-          SizedBox(height: 10,)
-          ,TopCatagoryWidget(),
-          SizedBox(height: 10,),
-          CarouselWidget()
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            AddressBoxWidget(),
+            SizedBox(height: 10,)
+            ,TopCatagoryWidget(),
+            SizedBox(height: 10,),
+            CarouselWidget(),
+            // SizedBox(height: 18,),
+            DealOfDayWidget()
+          ],
+        ),
       ),
     );
   }

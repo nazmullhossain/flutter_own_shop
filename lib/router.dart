@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecomer_riv/pages/home_pages.dart';
 import 'package:flutter_ecomer_riv/widgets/bottom_bar-widgets.dart';
 
+import 'admin/pages/add_product_admin_page.dart';
 import 'features/auth/auth_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings){
@@ -19,6 +20,12 @@ Route<dynamic> generateRoute(RouteSettings routeSettings){
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_)=>BottomBarWidget());
+
+
+    case AddProductAdminPage.routeName:
+      return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_)=>AddProductAdminPage());
 
     default:
       return MaterialPageRoute(
