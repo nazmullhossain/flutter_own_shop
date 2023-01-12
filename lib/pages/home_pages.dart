@@ -1,9 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_ecomer_riv/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../const/global_varriable.dart';
 import '../widgets/addres_box_widgets.dart';
+import '../widgets/carousel_widgets.dart';
 import '../widgets/top_catagory_widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -95,7 +97,9 @@ borderSide: BorderSide.none,
         children: const [
           AddressBoxWidget(),
           SizedBox(height: 10,)
-          ,TopCatagoryWidget()
+          ,TopCatagoryWidget(),
+          SizedBox(height: 10,),
+          CarouselWidget()
         ],
       ),
     );
