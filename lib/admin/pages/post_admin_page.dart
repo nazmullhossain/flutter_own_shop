@@ -29,16 +29,16 @@ class _PostsScreenState extends State<PostsScreen> {
     setState(() {});
   }
 
-  // void deleteProduct(Product product, int index) {
-  //   adminServices.deleteProduct(
-  //     context: context,
-  //     product: product,
-  //     onSuccess: () {
-  //       products!.removeAt(index);
-  //       setState(() {});
-  //     },
-  //   );
-  // }
+void deleteProduct(Product product, int index,){
+    adminServices.deleteProduct(
+        context: context, product: product,
+        onSuccess: (){
+          products!.removeAt(index);
+          setState(() {
+
+          });
+        });
+}
 
   void navigateToAddProduct() {
     Navigator.pushNamed(context, AddProductAdminPage.routeName);
@@ -47,8 +47,8 @@ class _PostsScreenState extends State<PostsScreen> {
   @override
   Widget build(BuildContext context) {
     return products == null
-        ? const LoadingWidget()
-        : Scaffold(
+        ?  LoadingWidget()
+       : Scaffold(
       body: GridView.builder(
         itemCount: products!.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -85,7 +85,7 @@ class _PostsScreenState extends State<PostsScreen> {
                       ],
                     ),
                     IconButton(
-                      onPressed: (){},
+                      onPressed: ()=>deleteProduct(productData, index),
                       icon: const Icon(
                         Icons.delete_outline,
                       ),
