@@ -49,7 +49,7 @@ List list=[
          scrollDirection: Axis.horizontal,
            itemCount: list.length,
            itemBuilder: (context,index){
-return SingleProductWidget(image: list[index]);
+return SingleProduct(image: list[index]);
        }),
         )
       ],

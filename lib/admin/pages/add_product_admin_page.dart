@@ -1,9 +1,14 @@
+import 'dart:io';
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecomer_riv/const/utils.dart';
 
 import '../../const/global_varriable.dart';
 import '../../widgets/custom_button_widget.dart';
 import '../../widgets/custom_text_field.dart';
+import '../services/admin_services.dart';
 
 class AddProductAdminPage extends StatefulWidget {
   const AddProductAdminPage({Key? key}) : super(key: key);
@@ -17,7 +22,7 @@ class _AddProductAdminPageState extends State<AddProductAdminPage> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _quantityController = TextEditingController();
-
+final AdminServices adminServices=AdminServices();
   @override
   void dispose() {
     // TODO: implement dispose
@@ -27,7 +32,8 @@ class _AddProductAdminPageState extends State<AddProductAdminPage> {
     _priceController.dispose();
     super.dispose();
   }
-
+  final _addProductFormKey=GlobalKey<FormState>();
+List<File>images=[];
   String catgories = "Mobiles";
   List<String> productCategories = [
     "Mobiles",
@@ -36,6 +42,23 @@ class _AddProductAdminPageState extends State<AddProductAdminPage> {
     "Books",
     "Fashion"
   ];
+  void sellProduct(){
+if(_addProductFormKey.currentState!.validate() && images.isNotEmpty){
+  adminServices.sellProduct(context: context,
+      name: _productNameContorller.text,
+      description: _descriptionController.text,
+      price: double.parse(_priceController.text),
+      quantity:double.parse(_quantityController.text),
+      category: catgories,
+      images: images);
+}
+  }
+  void selectImages()async{
+    var res=await pickImage();
+    setState(() {
+images=res;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,59 +68,71 @@ class _AddProductAdminPageState extends State<AddProductAdminPage> {
               centerTitle: true,
               flexibleSpace: Container(
                 decoration:
-                    BoxDecoration(gradient: GlobalVariables.appBarGradiant),
+                    const BoxDecoration(gradient: GlobalVariables.appBarGradiant),
               ),
-              title: Text(
+              title: const Text(
                 "Add Product",
                 style: TextStyle(color: Colors.black),
               )),
         ),
         body: SingleChildScrollView(
           child: Form(
+            key: _addProductFormKey,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  DottedBorder(
-                    borderType: BorderType.RRect,
-                    radius: Radius.circular(10),
-                    dashPattern: [10, 4],
-                    strokeCap: StrokeCap.round,
-                    child: Container(
-                      width: double.infinity,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.folder_open_outlined,
-                            size: 40,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "Select Product Images",
-                            style: TextStyle(fontSize: 15, color: Colors.grey),
-                          )
-                        ],
+               images.isNotEmpty?
+               CarouselSlider(
+                   items: images.map((e) {
+                     return Builder(builder: (BuildContext conext)=>Image.file(e,fit: BoxFit.cover,height: 200,));
+                   }).toList(), options: CarouselOptions(
+                   height: 180)
+               )
+
+                   :GestureDetector(
+                    onTap: selectImages,
+                    child: DottedBorder(
+                      borderType: BorderType.RRect,
+                      radius: const Radius.circular(10),
+                      dashPattern: [10, 4],
+                      strokeCap: StrokeCap.round,
+                      child: Container(
+                        width: double.infinity,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Icon(
+                              Icons.folder_open_outlined,
+                              size: 40,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "Select Product Images",
+                              style: TextStyle(fontSize: 15, color: Colors.grey),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   CustomField(
                     controller: _productNameContorller,
                     hintText: 'Product Name',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   CustomField(
@@ -140,7 +175,7 @@ class _AddProductAdminPageState extends State<AddProductAdminPage> {
                   SizedBox(height: 10,),
                   CustomButtonWidget(
                     text: 'Send',
-                    onTap: () {  },),
+                    onTap: () { sellProduct() ;},),
                   SizedBox(height: 15,)
                 ],
               ),

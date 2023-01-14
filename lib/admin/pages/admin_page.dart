@@ -15,7 +15,7 @@ class _AdminPageState extends State<AdminPage> {
   double bottomBarWidth=42;
   double bottomBarBorderWidth=5;
   List<Widget> pageMain=[
-    PostAdminPage(),
+    PostsScreen(),
     Center(child: Text("Analytics Page"),),
     Center(child: Text("cart Page"),),
 
