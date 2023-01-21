@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecomer_riv/pages/search_page.dart';
 import 'package:flutter_ecomer_riv/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +19,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void navigateToSearchScreen(String query){
+    Navigator.pushNamed(context, SearchPage.routeName,arguments: query);
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
@@ -39,6 +44,7 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(7),
                       elevation: 1,
                       child: TextFormField(
+                        onFieldSubmitted: navigateToSearchScreen,
                         decoration: InputDecoration(
                             prefixIcon: InkWell(
                           onTap: () {},

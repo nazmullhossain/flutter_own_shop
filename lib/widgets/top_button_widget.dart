@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecomer_riv/const/global_varriable.dart';
 
+import '../pages/catagory_deals_paeg.dart';
 import 'account_button_widget.dart';
 
 class TopButtonWidget extends StatelessWidget {

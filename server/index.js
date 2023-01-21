@@ -5,10 +5,12 @@ const PORT = 3000;
 const DB = "mongodb+srv://nazmullflutter:165257As$@cluster0.n00nfml.mongodb.net/?retryWrites=true&w=majority";
 const authRouter = require('./routes/auth.js');
 const adminRouter=require("./routes/admin");
+const productRouter=require("./routes/product_route");
 //middleware
 app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);
+app.use(productRouter);
 
 //connection mongoose
 mongoose.connect(DB).then(() => {

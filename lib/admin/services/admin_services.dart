@@ -116,7 +116,9 @@ class AdminServices {
           onSuccess();
         },
       );
-    } catch (e) {
+    }
+
+    catch (e) {
       showSnackBar(context, e.toString());
     }
   }
