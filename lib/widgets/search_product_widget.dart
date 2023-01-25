@@ -10,6 +10,16 @@ class SearchProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double avgRating=0;
+    double totalRating=0;
+
+    for(int i=0; i<product.rating!.length;i++){
+      totalRating+= product.rating![i].rating;
+
+    }
+    if(totalRating!=0){
+avgRating=totalRating / product.rating!.length;
+    }
     return Column(
       children: [
         Container(
@@ -19,7 +29,7 @@ class SearchProductWidget extends StatelessWidget {
             children: [
               Image.network(
                 product.images[0],
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.contain,
                 height: 135,
                 width: 135,
               ),
@@ -38,8 +48,8 @@ class SearchProductWidget extends StatelessWidget {
                   Container(
                       width: 170,
                       padding: EdgeInsets.only(left: 8, top: 5),
-                      child: const StarWidget(
-                        rating: 4,
+                      child:  StarWidget(
+                        rating: avgRating,
                       )),
                   Container(
                       width: 170,
@@ -68,7 +78,7 @@ class SearchProductWidget extends StatelessWidget {
 
                   Container(
                       width: 170,
-                      padding: EdgeInsets.only(left: 10, ),
+                      padding: const EdgeInsets.only(left: 10, ),
                       child: Text(
                         "In Stock",
                         maxLines: 2,

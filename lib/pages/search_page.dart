@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecomer_riv/pages/product_details_page.dart';
 import 'package:flutter_ecomer_riv/widgets/addres_box_widgets.dart';
 import 'package:flutter_ecomer_riv/widgets/loading_widget.dart';
 
@@ -121,7 +122,11 @@ class _SearchPageState extends State<SearchPage> {
                   itemBuilder: (context,index){
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: SearchProductWidget(product: products![index],),
+              child: GestureDetector(
+                  onTap: (){
+                    Navigator.pushNamed(context, ProductDetailsPage.routeName,arguments: products![index]);
+                  },
+                  child: SearchProductWidget(product: products![index],)),
             );
           }))
         ],

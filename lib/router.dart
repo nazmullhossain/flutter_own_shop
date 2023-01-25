@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecomer_riv/models/product_models.dart';
 import 'package:flutter_ecomer_riv/pages/catagory_deals_paeg.dart';
 import 'package:flutter_ecomer_riv/pages/home_pages.dart';
+import 'package:flutter_ecomer_riv/pages/product_details_page.dart';
 import 'package:flutter_ecomer_riv/pages/search_page.dart';
 import 'package:flutter_ecomer_riv/widgets/bottom_bar-widgets.dart';
 
@@ -28,6 +30,13 @@ Route<dynamic> generateRoute(RouteSettings routeSettings){
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_)=>CategoryDealsScreen(category: catagory,));
+
+//noted
+    case ProductDetailsPage.routeName:
+      var product=routeSettings.arguments as Product;
+      return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_)=>ProductDetailsPage( product: product,));
 
 
     case SearchPage.routeName:

@@ -32,7 +32,9 @@ class AuthServices {
           id: "",
           password: password,
           address: "",
-          token: "");
+          token: "",
+      cart: []
+      );
     http.Response res= await http.post(Uri.parse("$uri/api/signup"),
           body:
           user.toJson(),

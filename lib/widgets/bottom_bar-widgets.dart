@@ -1,6 +1,8 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecomer_riv/const/global_varriable.dart';
+import 'package:flutter_ecomer_riv/provider/user_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../pages/account_page.dart';
 import '../pages/home_pages.dart';
@@ -29,6 +31,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
   }
   @override
   Widget build(BuildContext context) {
+    final userCartLen=context.watch<UserProvider>().user.cart.length;
     return Scaffold(
 
 
@@ -92,7 +95,7 @@ currentIndex: _page,
               ),
               child: Badge(
                 elevation: 0,
-                  badgeContent: Text("2"),
+                  badgeContent: Text(userCartLen.toString()),
                   badgeColor: Colors.red,
                   child: Icon(Icons.shopping_bag_outlined)),
             ),
